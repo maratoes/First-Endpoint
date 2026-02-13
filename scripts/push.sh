@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-IMAGE_NAME="ghcr.io/aminatorex/first-endpoint"
+IMAGE_NAME="docker.io/aminatorex/first-endpoint"
 VERSION="v0.16.0"
 
 docker push "${IMAGE_NAME}:${VERSION}"
