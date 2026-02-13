@@ -1,0 +1,10 @@
+model:
+  name: Qwen/Qwen3-14B-Instruct
+  engine: vllm
+  quantization: awq
+  max_model_len: 8192
+deployment:
+  gpu: NVIDIA A40
+  workers_min: 0
+  workers_max: 3
+  idle_timeout_seconds: 30
