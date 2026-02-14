@@ -30,6 +30,12 @@ def initialize_model() -> LLM:
 
 def handler(job: Dict[str, Any]) -> Dict[str, Any]:
     try:
+        if model is None:
+            try:
+                initialize_model()
+            except Exception as exc:  # noqa: BLE001
+                return {"error": f"model_init_failed: {exc}", "status": "error"}
+
         data = job.get("input", {})
         prompt = data.get("prompt", "")
         sampling = SamplingParams(
@@ -44,5 +50,4 @@ def handler(job: Dict[str, Any]) -> Dict[str, Any]:
         return {"error": str(exc), "status": "error"}
 
 
-initialize_model()
 runpod.serverless.start({"handler": handler})
