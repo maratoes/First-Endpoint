@@ -1,7 +1,7 @@
 FROM runpod/pytorch:1.0.3-cu1290-torch291-ubuntu2204
 
 RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
-RUN pip install --no-cache-dir vllm==0.15.1 runpod==1.6.2 huggingface-hub pydantic
+RUN pip install --no-cache-dir vllm==0.15.1 runpod==1.7.0 huggingface-hub pydantic
 
 WORKDIR /app
 COPY requirements.txt .
