@@ -11,14 +11,20 @@ def initialize_model() -> LLM:
     global model
     if model is not None:
         return model
-    model = LLM(
-        model=os.getenv("MODEL_NAME", "Qwen/Qwen3-14B-Instruct"),
-        trust_remote_code=True,
-        max_model_len=int(os.getenv("MAX_MODEL_LEN", "8192")),
-        quantization=os.getenv("QUANTIZATION", "awq"),
-        tensor_parallel_size=int(os.getenv("TENSOR_PARALLEL_SIZE", "1")),
-        gpu_memory_utilization=float(os.getenv("GPU_MEMORY_UTILIZATION", "0.95")),
-    )
+    quantization = os.getenv("QUANTIZATION", "").strip().lower()
+    llm_kwargs: dict[str, Any] = {
+        "model": os.getenv("MODEL_NAME", "Qwen/Qwen3-14B-Instruct"),
+        "trust_remote_code": True,
+        "max_model_len": int(os.getenv("MAX_MODEL_LEN", "8192")),
+        "tensor_parallel_size": int(os.getenv("TENSOR_PARALLEL_SIZE", "1")),
+        "gpu_memory_utilization": float(os.getenv("GPU_MEMORY_UTILIZATION", "0.95")),
+    }
+    # vLLM quantization expects compatible weights/config. If QUANTIZATION is not
+    # set (or set to "none"), run in FP16/BF16 default mode.
+    if quantization and quantization != "none":
+        llm_kwargs["quantization"] = quantization
+
+    model = LLM(**llm_kwargs)
     return model
 
 

@@ -11,7 +11,9 @@ COPY config.yaml .
 
 ENV MODEL_NAME="Qwen/Qwen3-14B-Instruct"
 ENV MAX_MODEL_LEN=8192
-ENV QUANTIZATION="awq"
+# Leave empty by default; set explicitly only if you are sure the model weights
+# are compatible with the requested quantization method.
+ENV QUANTIZATION=""
 ENV TENSOR_PARALLEL_SIZE=1
 ENV GPU_MEMORY_UTILIZATION=0.95
 
