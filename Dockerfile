@@ -9,11 +9,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY handler.py .
 COPY config.yaml .
 
-ENV MODEL_NAME="Qwen/Qwen3-14B-Instruct"
+ENV MODEL_NAME="Qwen/Qwen3-14B-AWQ"
 ENV MAX_MODEL_LEN=8192
-# Leave empty by default; set explicitly only if you are sure the model weights
-# are compatible with the requested quantization method.
-ENV QUANTIZATION=""
+# AWQ model variant expects AWQ quantization.
+ENV QUANTIZATION="awq"
 ENV TENSOR_PARALLEL_SIZE=1
 ENV GPU_MEMORY_UTILIZATION=0.95
 

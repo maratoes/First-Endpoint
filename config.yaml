@@ -1,7 +1,7 @@
 model:
-  name: Qwen/Qwen3-14B-Instruct
+  name: Qwen/Qwen3-14B-AWQ
   engine: vllm
-  quantization: none
+  quantization: awq
   max_model_len: 8192
 deployment:
   gpu: NVIDIA A40
