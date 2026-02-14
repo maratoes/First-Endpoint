@@ -8,6 +8,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY handler.py .
 COPY config.yaml .
+COPY scripts ./scripts
 
 ENV MODEL_NAME="Qwen/Qwen3-14B-AWQ"
 ENV MAX_MODEL_LEN=8192
