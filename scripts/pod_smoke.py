@@ -12,7 +12,12 @@ network volume at /runpod-volume. It:
 from __future__ import annotations
 
 import os
+import sys
 import time
+from pathlib import Path
+
+# Ensure repo root (where handler.py lives) is importable even if CWD != /app.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 
 def _maybe_prefetch(model_name: str) -> None:
@@ -60,4 +65,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
